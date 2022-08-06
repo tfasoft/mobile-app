@@ -11,6 +11,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _selectedPage = 1;
+  void _changePage(int index) {
+    setState(() {
+      _selectedPage = index;
+    });
+  }
+
+  final List<Widget> _pages = <Widget>[
+    const Text("Accounts"),
+    const Text("Home"),
+    const Text("Settings"),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +39,26 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: Center(
-        child: Text(Provider.of<AppState>(context, listen: true).getUid),
+        child: _pages.elementAt(_selectedPage),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Accounts',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        currentIndex: _selectedPage,
+        onTap: _changePage,
+        // elevation: 0,
       ),
     );
   }
