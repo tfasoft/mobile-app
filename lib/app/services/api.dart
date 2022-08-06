@@ -5,7 +5,7 @@ class DioClient {
 
   final _baseUrl = 'http://192.168.1.5:8000/api';
 
-  Future<Response> login(String email, String password) async {
+  Future<Response> auth(String email, String password) async {
     Map data = {
       "email": email,
       "password": password,
@@ -33,6 +33,42 @@ class DioClient {
 
     try {
       response = await _dio.post('${_baseUrl}/mobile/connect', data: data);
+
+      return response;
+    } on DioError catch (e) {
+      response = e.response!;
+
+      return response;
+    }
+  }
+
+  Future<Response> getUser(String tid) async {
+    Map data = {
+      "tid": tid,
+    };
+
+    Response response;
+
+    try {
+      response = await _dio.post('${_baseUrl}/user/login', data: data);
+
+      return response;
+    } on DioError catch (e) {
+      response = e.response!;
+
+      return response;
+    }
+  }
+
+  Future<Response> login(String tid) async {
+    Map data = {
+      "tid": tid,
+    };
+
+    Response response;
+
+    try {
+      response = await _dio.post('${_baseUrl}/user/login', data: data);
 
       return response;
     } on DioError catch (e) {
