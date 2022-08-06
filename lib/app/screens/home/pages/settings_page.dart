@@ -20,13 +20,24 @@ class _SettingsPageState extends State<SettingsPage> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
+  final List<Map> settingsItems = [
+    {
+      "title": "Change information",
+      "icon": Icons.medical_information,
+    },
+    {
+      "title": "About and policy",
+      "icon": Icons.local_police_rounded,
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: const [
-        Text(
+      children: [
+        const Text(
           "Settings",
           style: TextStyle(
             fontSize: 25,
@@ -34,8 +45,24 @@ class _SettingsPageState extends State<SettingsPage> {
             color: Colors.blue,
           ),
         ),
-        Divider(color: Colors.blue),
-        SizedBox(height: 10),
+        const Divider(color: Colors.blue),
+        const SizedBox(height: 10),
+        Expanded(
+          child: ListView.builder(
+            itemCount: settingsItems.length,
+            // separatorBuilder: (BuildContext context, int index) => const Divider(),
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                iconColor: Colors.blue,
+                tileColor: Colors.white,
+                leading: Icon(settingsItems[index]['icon']),
+                trailing: const Icon(Icons.arrow_forward_ios),
+                title: Text(settingsItems[index]['title']),
+                onTap: () {},
+              );
+            },
+          ),
+        )
       ],
     );
   }
