@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TFA_FullWidthButton extends StatefulWidget {
-  const TFA_FullWidthButton({
+class TFA_Button extends StatefulWidget {
+  const TFA_Button({
     Key? key,
     this.text,
     this.variant,
@@ -13,10 +13,10 @@ class TFA_FullWidthButton extends StatefulWidget {
   final onClick;
 
   @override
-  State<TFA_FullWidthButton> createState() => _TFA_FullWidthButtonState();
+  State<TFA_Button> createState() => _TFA_ButtonState();
 }
 
-class _TFA_FullWidthButtonState extends State<TFA_FullWidthButton> {
+class _TFA_ButtonState extends State<TFA_Button> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
