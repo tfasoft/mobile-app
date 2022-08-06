@@ -25,8 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: const Center(
-        child: Text('Home Screen'),
+      body: Center(
+        child: Text(Provider.of<AppState>(context, listen: true).getUid),
       ),
     );
   }
