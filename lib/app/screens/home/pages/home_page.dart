@@ -1,5 +1,10 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:tfasoft_mobile/app/services/api.dart';
+import 'package:tfasoft_mobile/app/services/state.dart';
+
 import 'package:tfasoft_mobile/app/widgets/button/tfa_button.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,7 +26,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _getLoginToken(BuildContext context) async {
+    var response = _client.login(Provider.of<AppState>(context, listen: false).getUser["tid"]);
 
+    response.then((result) {
+      if (result.statusCode == 200) {
+        Map data = result.data;
+
+        FlutterClipboard.copy(data['token'])
+          .then((success) => _showSnackBar(context, "Token copied"));
+      }
+    });
   }
 
   @override
@@ -43,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         TFA_Button(
           variant: "contained",
           text: "Get access token",
-          onClick: () => {},
+          onClick: () => _getLoginToken(context),
         ),
       ],
     );
