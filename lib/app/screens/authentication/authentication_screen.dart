@@ -44,6 +44,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
             child: ListBody(
               children: <Widget>[
                 TFA_Field(
+                  password: true,
                   controller: _mcode,
                   variant: "outlined",
                   hint: "Enter M-Code",
@@ -115,6 +116,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                 ),
                 const SizedBox(height: 30),
                 TFA_Field(
+                  password: false,
                   controller: _email,
                   variant: "outlined",
                   hint: "Enter email",
@@ -122,6 +124,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                 ),
                 const SizedBox(height: 10),
                 TFA_Field(
+                  password: true,
                   controller: _email,
                   variant: "outlined",
                   hint: "Enter password",
