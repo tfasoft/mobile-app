@@ -6,12 +6,14 @@ class TFA_Field extends StatefulWidget {
     this.variant,
     this.label,
     this.hint,
+    this.password,
     this.controller
   }) : super(key: key);
 
   final variant;
   final label;
   final hint;
+  final password;
   final controller;
 
   @override
@@ -22,6 +24,8 @@ class _TFA_FieldState extends State<TFA_Field> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: widget.controller,
+      obscureText: widget.password,
       decoration: InputDecoration(
         hintText: widget.hint,
         label: Text(widget.label),
