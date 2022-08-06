@@ -20,6 +20,10 @@ class _HomePageState extends State<HomePage> {
   Future<void> _showSnackBar(BuildContext context, String message) async {
     final snackBar = SnackBar(
       content: Text(message),
+      action: SnackBarAction(
+        label: 'Close',
+        onPressed: () {},
+      ),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
