@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:tfasoft_mobile/app/services/api.dart';
+import 'package:tfasoft_mobile/app/services/state.dart';
 
 import 'package:tfasoft_mobile/app/widgets/button/tfa_button.dart';
 import 'package:tfasoft_mobile/app/widgets/field/tfa_field.dart';
@@ -11,13 +15,23 @@ class AuthenticationScreen extends StatefulWidget {
 }
 
 class _AuthenticationScreenState extends State<AuthenticationScreen> {
+  final DioClient _client = DioClient();
+
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
   final TextEditingController _mcode = TextEditingController();
 
   Future<void> _loginDialog(BuildContext context) async {
-    print("Hi");
+    var response = _client.login(_email.text, _password.text);
+
+    response.then((result) {
+      if (result.statusCode == 200) {
+        Provider.of<AppState>(context, listen: false).login();
+      } else {
+        print(result.data);
+      }
+    });
   }
 
   Future<void> _connectDialog(BuildContext context) async {
@@ -91,7 +105,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
               children: [
                 const Center(
                   child: Text(
-                    "TFAsoft",
+                    "TFAsoft Mobile",
                     style: TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.bold,
