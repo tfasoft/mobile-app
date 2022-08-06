@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tfasoft_mobile/app/widgets/button/tfa_button.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -12,6 +11,10 @@ class _SettingsPageState extends State<SettingsPage> {
   Future<void> _showSnackBar(BuildContext context, String message) async {
     final snackBar = SnackBar(
       content: Text(message),
+      action: SnackBarAction(
+        label: 'Close',
+        onPressed: () {},
+      ),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -22,8 +25,8 @@ class _SettingsPageState extends State<SettingsPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const Text(
+      children: const [
+        Text(
           "Settings",
           style: TextStyle(
             fontSize: 25,
@@ -31,13 +34,8 @@ class _SettingsPageState extends State<SettingsPage> {
             color: Colors.blue,
           ),
         ),
-        const Divider(color: Colors.blue),
-        const SizedBox(height: 10),
-        TFA_Button(
-          variant: "contained",
-          text: "Get access token",
-          onClick: () => {},
-        ),
+        Divider(color: Colors.blue),
+        SizedBox(height: 10),
       ],
     );
   }
