@@ -22,12 +22,34 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
 
   final TextEditingController _mcode = TextEditingController();
 
-  Future<void> _loginDialog(BuildContext context) async {
+  Future<void> _loginUser(BuildContext context) async {
     var response = _client.login(_email.text, _password.text);
 
     response.then((result) {
       if (result.statusCode == 200) {
-        Provider.of<AppState>(context, listen: false).login();
+        Map user = result.data;
+
+        _email.clear();
+        _password.clear();
+
+        Provider.of<AppState>(context, listen: false).login(user["_id"]);
+      } else {
+        print(result.data);
+      }
+    });
+  }
+
+  Future<void> _connectUser(BuildContext context) async {
+    var response = _client.connect(_mcode.text);
+
+    response.then((result) {
+      if (result.statusCode == 200) {
+        Map user = result.data;
+
+        _mcode.clear();
+        Navigator.of(context).pop();
+
+        Provider.of<AppState>(context, listen: false).login(user["_id"]);
       } else {
         print(result.data);
       }
@@ -78,9 +100,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
             TFA_Button(
               variant: "contained",
               text: "Connect",
-              onClick: () {
-                Navigator.of(context).pop();
-              },
+              onClick: () => _connectUser(context),
             )
           ],
         );
@@ -134,7 +154,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                 TFA_Button(
                   text: "Login",
                   variant: "contained",
-                  onClick: () => _loginDialog(context),
+                  onClick: () => _loginUser(context),
                 ),
                 const SizedBox(height: 10),
                 TFA_Button(
