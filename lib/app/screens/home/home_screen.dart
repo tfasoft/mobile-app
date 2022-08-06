@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:tfasoft_mobile/app/screens/home/pages/home_page.dart';
 import 'package:tfasoft_mobile/app/screens/home/pages/log_page.dart';
@@ -23,36 +24,56 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Future<void> _showSnackBar(BuildContext context, String message) async {
+    final snackBar = SnackBar(
+      content: Text(message),
+      action: SnackBarAction(
+        label: 'Close',
+        onPressed: () {},
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  Future<void> _openUrl(BuildContext context, String url) async {
+    final Uri _url = Uri.parse(url);
+
+    if (!await launchUrl(_url)) {
+      _showSnackBar(context, "Can not open $_url");
+    }
+  }
+
   List<Map> drawerLinkItems = [
     {
       "title": "TFASoft",
       "icon": Icons.home,
-      "link": "https://tfasoft.amirhossein.info",
+      "url": "https://tfasoft.amirhossein.info",
     },
     {
       "title": "Dashboard",
       "icon": Icons.dashboard,
-      "link": "https://dashboard.amirhossein.info",
+      "url": "https://dashboard.amirhossein.info",
     },
     {
       "title": "Blog",
       "icon": Icons.rss_feed,
-      "link": "https://blog.amirhossein.info",
+      "url": "https://blog.amirhossein.info",
     },
     {
       "title": "Docs",
       "icon": Icons.menu_book,
-      "link": "https://docs.amirhossein.info",
+      "url": "https://docs.amirhossein.info",
     },
     {
       "title": "Demo",
       "icon": Icons.biotech,
-      "link": "https://demo.amirhossein.info",
+      "url": "https://demo.amirhossein.info",
     },
     {
       "title": "Mobile",
       "icon": Icons.phone_iphone,
-      "link": "https://mobile.amirhossein.info",
+      "url": "https://mobile.amirhossein.info",
     },
   ];
 
@@ -109,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     leading: Icon(drawerLinkItems[index]['icon']),
                     iconColor: Colors.blue,
                     title: Text(drawerLinkItems[index]['title']),
-                    onTap: () => {},
+                    onTap: () => _openUrl(context, drawerLinkItems[index]['url']),
                   );
                 },
               ),
