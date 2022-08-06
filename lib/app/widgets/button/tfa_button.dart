@@ -37,6 +37,12 @@ class _TFA_ButtonState extends State<TFA_Button> {
               : widget.variant == "outlined"
                   ? OutlinedButton(
                       onPressed: widget.onClick,
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(
+                          width: 1,
+                          color: Colors.blue,
+                        ),
+                      ),
                       child: Text(widget.text),
                     )
                   : ElevatedButton(
