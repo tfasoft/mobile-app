@@ -22,8 +22,16 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
 
   final TextEditingController _mcode = TextEditingController();
 
+  Future<void> _showSnackBar(BuildContext context, String message) async {
+    final snackBar = SnackBar(
+      content: Text(message),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   Future<void> _loginUser(BuildContext context) async {
-    var response = _client.login(_email.text, _password.text);
+    var response = _client.auth(_email.text, _password.text);
 
     response.then((result) {
       if (result.statusCode == 200) {
@@ -32,11 +40,11 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         _email.clear();
         _password.clear();
 
-        Provider.of<AppState>(context, listen: false).login(user["_id"]);
+        Provider.of<AppState>(context, listen: false).login(user["_id"], user);
       } else if (result.statusCode == 401) {
-        print(result.data['message']);
+        _showSnackBar(context, result.data['message']);
       } else {
-        print("Sorry, an error!");
+        _showSnackBar(context, "Sorry, an error!");
       }
     });
   }
@@ -51,11 +59,11 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         _mcode.clear();
         Navigator.of(context).pop();
 
-        Provider.of<AppState>(context, listen: false).login(user["_id"]);
+        Provider.of<AppState>(context, listen: false).login(user["_id"], user);
       } else if (result.statusCode == 401) {
-        print(result.data['message']);
+        _showSnackBar(context, result.data['message']);
       } else {
-        print("Sorry, an error!");
+        _showSnackBar(context, "Sorry, an error!");
       }
     });
   }
