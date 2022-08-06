@@ -14,7 +14,7 @@ class DioClient {
     Response response;
 
     try {
-      response = await _dio.post('${_baseUrl}/mobile/login', data: data);
+      response = await _dio.post('${_baseUrl}/mobile/auth', data: data);
       
       return response;
     } on DioError catch (e) {
