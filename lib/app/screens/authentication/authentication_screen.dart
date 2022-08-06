@@ -33,8 +33,10 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         _password.clear();
 
         Provider.of<AppState>(context, listen: false).login(user["_id"]);
+      } else if (result.statusCode == 401) {
+        print(result.data['message']);
       } else {
-        print(result.data);
+        print("Sorry, an error!");
       }
     });
   }
@@ -50,8 +52,10 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         Navigator.of(context).pop();
 
         Provider.of<AppState>(context, listen: false).login(user["_id"]);
+      } else if (result.statusCode == 401) {
+        print(result.data['message']);
       } else {
-        print(result.data);
+        print("Sorry, an error!");
       }
     });
   }
@@ -145,7 +149,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                 const SizedBox(height: 10),
                 TFA_Field(
                   password: true,
-                  controller: _email,
+                  controller: _password,
                   variant: "outlined",
                   hint: "Enter password",
                   label: "Password",
