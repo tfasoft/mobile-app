@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tfasoft_mobile/app/services/state.dart';
 
 class LogPage extends StatefulWidget {
   const LogPage({Key? key}) : super(key: key);
@@ -22,21 +24,6 @@ class _LogPageState extends State<LogPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: const [
-        Text(
-          "History of usages",
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: Colors.blue,
-          ),
-        ),
-        Divider(color: Colors.blue),
-        SizedBox(height: 10),
-      ],
-    );
+    return const Center(child: Text("Coming soon", style: TextStyle(color: Colors.blue)));
   }
 }
