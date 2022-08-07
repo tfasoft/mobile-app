@@ -15,10 +15,9 @@ class AppState extends ChangeNotifier {
     return _user;
   }
 
-  void login(String uid, Map user) {
+  void login(String uid) {
     _isLogin = true;
     _uid = uid;
-    _user = user;
     notifyListeners();
   }
   void logout() {
