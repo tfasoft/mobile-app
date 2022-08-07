@@ -42,15 +42,15 @@ class DioClient {
     }
   }
 
-  Future<Response> getUser(String tid) async {
+  Future<Response> getUser(String uid) async {
     Map data = {
-      "tid": tid,
+      "uid": uid,
     };
 
     Response response;
 
     try {
-      response = await _dio.post('${_baseUrl}/user/login', data: data);
+      response = await _dio.post('${_baseUrl}/user/get', data: data);
 
       return response;
     } on DioError catch (e) {
