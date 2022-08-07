@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome'),
+        title: const Text('TFA Mobile'),
         elevation: 0,
         centerTitle: true,
         actions: [
@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             DrawerHeader(
               decoration: const BoxDecoration(
-                color: Colors.blue,
+                color: Colors.blueGrey,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     leading: Icon(drawerLinkItems[index]['icon']),
-                    iconColor: Colors.blue,
+                    iconColor: Colors.blueGrey,
                     title: Text(drawerLinkItems[index]['title']),
                     onTap: () => _openUrl(context, drawerLinkItems[index]['url']),
                   );

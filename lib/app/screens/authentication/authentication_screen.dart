@@ -144,7 +144,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                   child: Text(
                     "TFAsoft Mobile",
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: Colors.blueGrey,
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
                     ),

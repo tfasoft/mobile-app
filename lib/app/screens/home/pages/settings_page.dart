@@ -52,21 +52,20 @@ class _SettingsPageState extends State<SettingsPage> {
         const Text(
           "Settings",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 30,
             fontWeight: FontWeight.bold,
-            color: Colors.blue,
+            color: Colors.blueGrey,
           ),
         ),
-        const Divider(color: Colors.blue),
-        const SizedBox(height: 10),
+        const SizedBox(height: 20),
         Expanded(
-          child: ListView.builder(
+          child: ListView.separated(
             itemCount: settingsItems.length,
-            // separatorBuilder: (BuildContext context, int index) => const Divider(),
+            separatorBuilder: (BuildContext context, int index) => const Divider(color: Colors.blueGrey),
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
-                iconColor: Colors.blue,
-                tileColor: Colors.white,
+                iconColor: Colors.blueGrey,
+                // tileColor: Colors.white,
                 leading: Icon(settingsItems[index]['icon']),
                 trailing: const Icon(Icons.arrow_forward_ios),
                 title: Text(settingsItems[index]['title']),

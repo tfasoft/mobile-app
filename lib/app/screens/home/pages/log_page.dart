@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tfasoft_mobile/app/services/state.dart';
 
 class LogPage extends StatefulWidget {
   const LogPage({Key? key}) : super(key: key);
@@ -24,6 +22,6 @@ class _LogPageState extends State<LogPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Coming soon", style: TextStyle(color: Colors.blue)));
+    return const Center(child: Text("Coming soon", style: TextStyle(color: Colors.blueGrey)));
   }
 }

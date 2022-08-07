@@ -51,13 +51,12 @@ class _HomePageState extends State<HomePage> {
         const Text(
           "Home",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 30,
             fontWeight: FontWeight.bold,
-            color: Colors.blue,
+            color: Colors.blueGrey,
           ),
         ),
-        const Divider(color: Colors.blue),
-        const SizedBox(height: 10),
+        const SizedBox(height: 20),
         TFA_Button(
           variant: "contained",
           text: "Get access token",

@@ -40,7 +40,7 @@ class _TFA_ButtonState extends State<TFA_Button> {
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(
                           width: 1,
-                          color: Colors.blue,
+                          color: Colors.blueGrey,
                         ),
                       ),
                       child: Text(widget.text),
