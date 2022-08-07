@@ -22,11 +22,23 @@ class _SettingsPageState extends State<SettingsPage> {
 
   final List<Map> settingsItems = [
     {
-      "title": "Change information",
+      "title": "Profile",
+      "details": "Change you name, surname, picture and etc.",
       "icon": Icons.medical_information,
     },
     {
+      "title": "Security",
+      "details": "Fields like changing email and password.",
+      "icon": Icons.security,
+    },
+    {
+      "title": "Telegram",
+      "details": "Settings related to Telegram, like changing tid.",
+      "icon": Icons.telegram,
+    },
+    {
       "title": "About and policy",
+      "details": "Read about or terms and stuff related.",
       "icon": Icons.local_police_rounded,
     },
   ];
@@ -58,6 +70,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 leading: Icon(settingsItems[index]['icon']),
                 trailing: const Icon(Icons.arrow_forward_ios),
                 title: Text(settingsItems[index]['title']),
+                subtitle: Text(
+                  settingsItems[index]['details'],
+                  style: const TextStyle(
+                    fontSize: 11,
+                  ),
+                ),
                 onTap: () {},
               );
             },
