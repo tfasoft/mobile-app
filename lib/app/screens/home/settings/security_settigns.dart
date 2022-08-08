@@ -38,7 +38,7 @@ class _SecuritySettingsState extends State<SecuritySettings> {
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text("Telegram Settings"),
+        title: const Text("Account Settings"),
         elevation: 0,
       ),
       body: Padding(
