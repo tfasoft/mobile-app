@@ -13,6 +13,19 @@ class TelegramSettings extends StatefulWidget {
 }
 
 class _TelegramSettingsState extends State<TelegramSettings> {
+  Future<void> _showSnackBar(BuildContext context, String message) async {
+    final snackBar = SnackBar(
+      content: Text(message),
+      action: SnackBarAction(
+        textColor: Colors.blue,
+        label: 'Close',
+        onPressed: () {},
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   final TextEditingController _tid = TextEditingController();
 
   Future<void> changeMCode(BuildContext context) async {
