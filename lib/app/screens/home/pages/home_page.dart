@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _getLoginToken(BuildContext context) async {
-    var response = _client.login(Provider.of<AppState>(context, listen: false).getUser["tid"]);
+    var response = _client.getLoginToken(Provider.of<AppState>(context, listen: false).getUser["tid"]);
 
     response.then((result) {
       if (result.statusCode == 200) {

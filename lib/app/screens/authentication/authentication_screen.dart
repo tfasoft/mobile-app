@@ -49,7 +49,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   Future<void> _loginUser(BuildContext context) async {
     setState(() => _loadingLogin = true);
 
-    var response = _client.auth(_email.text, _password.text);
+    var response = _client.login(_email.text, _password.text);
 
     response.then((result) {
       setState(() => _loadingLogin = false);
