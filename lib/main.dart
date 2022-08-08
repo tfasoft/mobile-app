@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
+          // useMaterial3: true,
         ),
         home: const Landing(),
       ),
