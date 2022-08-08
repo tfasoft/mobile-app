@@ -8,6 +8,19 @@ class ProfileSettings extends StatefulWidget {
 }
 
 class _ProfileSettingsState extends State<ProfileSettings> {
+  Future<void> _showSnackBar(BuildContext context, String message) async {
+    final snackBar = SnackBar(
+      content: Text(message),
+      action: SnackBarAction(
+        textColor: Colors.blue,
+        label: 'Close',
+        onPressed: () {},
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,9 +32,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
         title: const Text("Profile Settings"),
         elevation: 0,
       ),
-      body: const Center(
-        child: Text("Profile Settings"),
-      ),
+      body: const Center(child: Text("Coming soon", style: TextStyle(color: Colors.blueGrey))),
     );;
   }
 }
