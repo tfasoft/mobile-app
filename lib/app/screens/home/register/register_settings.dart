@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tfasoft_mobile/app/services/api.dart';
+import 'package:tfasoft_mobile/app/services/state.dart';
 import 'package:tfasoft_mobile/app/widgets/button/tfa_button.dart';
 import 'package:tfasoft_mobile/app/widgets/field/tfa_field.dart';
 import 'package:tfasoft_mobile/app/widgets/title/page_subtitle.dart';
@@ -11,6 +14,8 @@ class RegisterSettings extends StatefulWidget {
 }
 
 class _RegisterSettingsState extends State<RegisterSettings> {
+  final DioClient _client = DioClient();
+
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
@@ -25,6 +30,26 @@ class _RegisterSettingsState extends State<RegisterSettings> {
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  bool registerLoading = false;
+
+  Future<void> _registerUser(BuildContext context) async {
+    setState(() => registerLoading = true);
+
+    var response = _client.register(Provider.of<AppState>(context, listen: false).getUid, _email.text, _password.text);
+
+    response.then((result) {
+      setState(() => registerLoading = false);
+
+      if (result.statusCode == 200) {
+        Navigator.of(context).pop();
+
+        _showSnackBar(context, "You are registered!");
+      } else {
+        _showSnackBar(context, "Sorry, there is an error.");
+      }
+    });
   }
 
   @override
@@ -55,7 +80,7 @@ class _RegisterSettingsState extends State<RegisterSettings> {
             const SizedBox(height: 10),
             TFA_Field(
               variant: "outlined",
-              password: false,
+              password: true,
               label: "Password",
               hint: "Enter your password",
               controller: _password,
@@ -63,7 +88,7 @@ class _RegisterSettingsState extends State<RegisterSettings> {
             const SizedBox(height: 10),
             TFA_Button(
               variant: "contained",
-              onClick: () {},
+              onClick: !registerLoading ? () => _registerUser(context) : null,
               text: "Register account",
             ),
           ],

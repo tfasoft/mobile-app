@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tfasoft_mobile/app/screens/home/register_settings.dart';
+import 'package:tfasoft_mobile/app/screens/home/register/register_settings.dart';
 import 'package:tfasoft_mobile/app/widgets/button/tfa_button.dart';
 
 class SecurityScreen extends StatefulWidget {
