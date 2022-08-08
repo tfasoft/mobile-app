@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tfasoft_mobile/app/screens/home/settings/profile_settings.dart';
 import 'package:tfasoft_mobile/app/screens/home/settings/security_settigns.dart';
 import 'package:tfasoft_mobile/app/screens/home/settings/telegram_settings.dart';
+import 'package:tfasoft_mobile/app/widgets/title/page_title.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -70,15 +71,7 @@ class _SettingsPageState extends State<SettingsPage> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text(
-          "Settings",
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: Colors.blueGrey,
-          ),
-        ),
-        const SizedBox(height: 20),
+        const UnderAppBar(title: "Settings"),
         Expanded(
           child: ListView.separated(
             itemCount: settingsItems.length,
