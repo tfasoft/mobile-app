@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:tfasoft_mobile/app/services/api.dart';
 import 'package:tfasoft_mobile/app/services/state.dart';
@@ -19,13 +20,16 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
 
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
-
   final TextEditingController _mcode = TextEditingController();
+
+  bool _loadingLogin = false;
+  bool _loadingConnect = false;
 
   Future<void> _showSnackBar(BuildContext context, String message) async {
     final snackBar = SnackBar(
       content: Text(message),
       action: SnackBarAction(
+        textColor: Colors.blue,
         label: 'Close',
         onPressed: () {},
       ),
@@ -34,10 +38,21 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
+  Future<void> _openUrl(BuildContext context, String url) async {
+    final Uri _url = Uri.parse(url);
+
+    if (!await launchUrl(_url)) {
+      _showSnackBar(context, "Can not open $_url");
+    }
+  }
+
   Future<void> _loginUser(BuildContext context) async {
+    setState(() => _loadingLogin = true);
+
     var response = _client.auth(_email.text, _password.text);
 
     response.then((result) {
+      setState(() => _loadingLogin = false);
       if (result.statusCode == 200) {
         Map user = result.data;
 
@@ -54,9 +69,13 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   }
 
   Future<void> _connectUser(BuildContext context) async {
+    setState(() => _loadingConnect = true);
+
     var response = _client.connect(_mcode.text);
 
     response.then((result) {
+      setState(() => _loadingConnect = false);
+
       if (result.statusCode == 200) {
         Map user = result.data;
 
@@ -107,16 +126,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
               },
             ),
             TFA_Button(
-              variant: "text",
-              text: "Manual",
-              onClick: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TFA_Button(
               variant: "contained",
               text: "Connect",
-              onClick: () => _connectUser(context),
+              onClick: !_loadingConnect ? () => _connectUser(context) : null,
             )
           ],
         );
@@ -170,7 +182,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                 TFA_Button(
                   text: "Login",
                   variant: "contained",
-                  onClick: () => _loginUser(context),
+                  onClick: !_loadingLogin ? () => _loginUser(context) : null,
                 ),
                 const SizedBox(height: 10),
                 TFA_Button(
@@ -182,7 +194,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                 TFA_Button(
                   text: "Read manual",
                   variant: "text",
-                  onClick: () => {},
+                  onClick: () => _openUrl(context, "https://mobile.amirhossein.info/manual"),
                 ),
               ],
             ),

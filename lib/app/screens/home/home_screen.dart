@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final snackBar = SnackBar(
       content: Text(message),
       action: SnackBarAction(
+        textColor: Colors.blue,
         label: 'Close',
         onPressed: () {},
       ),

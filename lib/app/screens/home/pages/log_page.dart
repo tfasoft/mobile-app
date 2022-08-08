@@ -12,6 +12,7 @@ class _LogPageState extends State<LogPage> {
     final snackBar = SnackBar(
       content: Text(message),
       action: SnackBarAction(
+        textColor: Colors.blue,
         label: 'Close',
         onPressed: () {},
       ),

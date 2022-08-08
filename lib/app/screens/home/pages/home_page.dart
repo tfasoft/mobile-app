@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
     final snackBar = SnackBar(
       content: Text(message),
       action: SnackBarAction(
+        textColor: Colors.blue,
         label: 'Close',
         onPressed: () {},
       ),
