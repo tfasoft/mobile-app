@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tfasoft_mobile/app/screens/home/settings/profile_settings.dart';
+import 'package:tfasoft_mobile/app/screens/home/settings/security_settigns.dart';
+import 'package:tfasoft_mobile/app/screens/home/settings/telegram_settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -35,21 +38,29 @@ class _SettingsPageState extends State<SettingsPage> {
       "title": "Profile",
       "details": "Change you name, surname, picture and etc.",
       "icon": Icons.medical_information,
+      "link": false,
+      "page": const ProfileSettings(),
     },
     {
       "title": "Security",
       "details": "Fields like changing email and password.",
       "icon": Icons.security,
+      "link": false,
+      "page": const SecuritySettings(),
     },
     {
       "title": "Telegram",
       "details": "Settings related to Telegram, like changing tid.",
       "icon": Icons.telegram,
+      "link": false,
+      "page": const TelegramSettings(),
     },
     {
       "title": "About and policy",
       "details": "Read about or terms and stuff related.",
       "icon": Icons.local_police_rounded,
+      "link": true,
+      "page": "https://mobile.amirhossein.info",
     },
   ];
 
@@ -85,7 +96,18 @@ class _SettingsPageState extends State<SettingsPage> {
                 //     fontSize: 11,
                 //   ),
                 // ),
-                // onTap: () => settingsItems[index]['action']
+                onTap: () {
+                  if (settingsItems[index]['link']) {
+                    _openUrl(context, settingsItems[index]['page']);
+                  } else {
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => settingsItems[index]['page'],
+                    ),
+                  );
+                  }
+                },
               );
             },
           ),
