@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'package:tfasoft_mobile/app/screens/authentication/authentication_screen.dart';
 import 'package:tfasoft_mobile/app/screens/home/home_screen.dart';
-import 'package:tfasoft_mobile/app/screens/home/security_screen.dart';
+import 'package:tfasoft_mobile/app/screens/home/register/security_screen.dart';
 
 import 'package:tfasoft_mobile/app/services/api.dart';
 import 'package:tfasoft_mobile/app/services/state.dart';
@@ -33,7 +33,7 @@ class _LandingState extends State<Landing> {
   @override
   Widget build(BuildContext context) {
     bool isLogin = Provider.of<AppState>(context, listen: true).getLogin;
-    Map user = Provider.of<AppState>(context).getUser;
+    Map user = Provider.of<AppState>(context, listen: true).getUser;
 
     if (isLogin) getUser(context, Provider.of<AppState>(context, listen: true).getUid);
 
