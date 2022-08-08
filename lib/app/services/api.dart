@@ -5,7 +5,8 @@ class DioClient {
 
   final _baseUrl = 'http://192.168.1.5:8000/api';
 
-  Future<Response> auth(String email, String password) async {
+  // Login user with email and password
+  Future<Response> login(String email, String password) async {
     Map data = {
       "email": email,
       "password": password,
@@ -14,7 +15,7 @@ class DioClient {
     Response response;
 
     try {
-      response = await _dio.post('${_baseUrl}/mobile/auth', data: data);
+      response = await _dio.post('$_baseUrl/mobile/login', data: data);
       
       return response;
     } on DioError catch (e) {
@@ -24,6 +25,30 @@ class DioClient {
     }
   }
 
+  // Register user with email and password
+  Future<Response> register(String id, String email, String password) async {
+    Map data = {
+      "id": id,
+      "data": {
+        "email": email,
+        "password": password,
+      }
+    };
+
+    Response response;
+
+    try {
+      response = await _dio.post('$_baseUrl/mobile/register', data: data);
+
+      return response;
+    } on DioError catch (e) {
+      response = e.response!;
+
+      return response;
+    }
+  }
+
+  // Connect to API with M-Code
   Future<Response> connect(String mcode) async {
     Map data = {
       "mcode": mcode,
@@ -32,7 +57,7 @@ class DioClient {
     Response response;
 
     try {
-      response = await _dio.post('${_baseUrl}/mobile/connect', data: data);
+      response = await _dio.post('$_baseUrl/mobile/connect', data: data);
 
       return response;
     } on DioError catch (e) {
@@ -42,6 +67,7 @@ class DioClient {
     }
   }
 
+  // Get user data
   Future<Response> getUser(String uid) async {
     Map data = {
       "uid": uid,
@@ -50,7 +76,7 @@ class DioClient {
     Response response;
 
     try {
-      response = await _dio.post('${_baseUrl}/user/get', data: data);
+      response = await _dio.post('$_baseUrl/user/get', data: data);
 
       return response;
     } on DioError catch (e) {
@@ -60,7 +86,8 @@ class DioClient {
     }
   }
 
-  Future<Response> login(String tid) async {
+  // Get the user token
+  Future<Response> getLoginToken(String tid) async {
     Map data = {
       "tid": tid,
     };
@@ -68,7 +95,7 @@ class DioClient {
     Response response;
 
     try {
-      response = await _dio.post('${_baseUrl}/user/login', data: data);
+      response = await _dio.post('$_baseUrl/user/login', data: data);
 
       return response;
     } on DioError catch (e) {
