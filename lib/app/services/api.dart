@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class DioClient {
   final Dio _dio = Dio();
 
-  final _baseUrl = 'http://192.168.1.5:8000/api';
+  final _baseUrl = 'http://192.168.1.5:9000/api';
 
   // Login user with email and password
   Future<Response> login(String email, String password) async {
@@ -15,7 +15,7 @@ class DioClient {
     Response response;
 
     try {
-      response = await _dio.post('$_baseUrl/mobile/login', data: data);
+      response = await _dio.post('$_baseUrl/mobile/mobile/login', data: data);
       
       return response;
     } on DioError catch (e) {
@@ -38,7 +38,7 @@ class DioClient {
     Response response;
 
     try {
-      response = await _dio.post('$_baseUrl/mobile/register', data: data);
+      response = await _dio.post('$_baseUrl/mobile/mobile/register', data: data);
 
       return response;
     } on DioError catch (e) {
@@ -57,7 +57,7 @@ class DioClient {
     Response response;
 
     try {
-      response = await _dio.post('$_baseUrl/mobile/connect', data: data);
+      response = await _dio.post('$_baseUrl/mobile/mobile/connect', data: data);
 
       return response;
     } on DioError catch (e) {
@@ -76,7 +76,7 @@ class DioClient {
     Response response;
 
     try {
-      response = await _dio.post('$_baseUrl/user/get', data: data);
+      response = await _dio.post('$_baseUrl/user/user/get', data: data);
 
       return response;
     } on DioError catch (e) {
@@ -95,7 +95,7 @@ class DioClient {
     Response response;
 
     try {
-      response = await _dio.post('$_baseUrl/user/login', data: data);
+      response = await _dio.post('$_baseUrl/user/user/login', data: data);
 
       return response;
     } on DioError catch (e) {
