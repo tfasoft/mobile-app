@@ -63,35 +63,39 @@ class _RegisterSettingsState extends State<RegisterSettings> {
         title: const Text("Account Settings"),
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const PageSubTitle(title: 'Enter email and password'),
-            TFA_Field(
-              variant: "outlined",
-              password: false,
-              label: "Email",
-              hint: "Enter your email",
-              controller: _email,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const PageSubTitle(title: 'Enter email and password'),
+                TFA_Field(
+                  variant: "outlined",
+                  password: false,
+                  label: "Email",
+                  hint: "Enter your email",
+                  controller: _email,
+                ),
+                const SizedBox(height: 10),
+                TFA_Field(
+                  variant: "outlined",
+                  password: true,
+                  label: "Password",
+                  hint: "Enter your password",
+                  controller: _password,
+                ),
+                const SizedBox(height: 10),
+                TFA_Button(
+                  variant: "contained",
+                  onClick: !registerLoading ? () => _registerUser(context) : null,
+                  text: "Register account",
+                ),
+              ],
             ),
-            const SizedBox(height: 10),
-            TFA_Field(
-              variant: "outlined",
-              password: true,
-              label: "Password",
-              hint: "Enter your password",
-              controller: _password,
-            ),
-            const SizedBox(height: 10),
-            TFA_Button(
-              variant: "contained",
-              onClick: !registerLoading ? () => _registerUser(context) : null,
-              text: "Register account",
-            ),
-          ],
+          ),
         ),
       ),
     );
