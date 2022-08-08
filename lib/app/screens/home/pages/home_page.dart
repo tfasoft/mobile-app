@@ -6,6 +6,7 @@ import 'package:tfasoft_mobile/app/services/api.dart';
 import 'package:tfasoft_mobile/app/services/state.dart';
 
 import 'package:tfasoft_mobile/app/widgets/button/tfa_button.dart';
+import 'package:tfasoft_mobile/app/widgets/title/page_title.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -49,15 +50,8 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text(
-          "Home",
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: Colors.blueGrey,
-          ),
-        ),
-        const SizedBox(height: 20),
+        const UnderAppBar(title: "Home"),
+        Expanded(child: Container()),
         TFA_Button(
           variant: "contained",
           text: "Get access token",
