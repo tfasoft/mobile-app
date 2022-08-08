@@ -172,6 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Settings',
           ),
         ],
+        unselectedItemColor: Colors.grey,
         currentIndex: _selectedPage,
         onTap: _changePage,
         // elevation: 0,
