@@ -1,12 +1,14 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:tfasoft_mobile/app/services/api.dart';
+import 'package:tfasoft_mobile/app/services/state.dart';
+
 import 'package:tfasoft_mobile/app/screens/home/pages/home_page.dart';
 import 'package:tfasoft_mobile/app/screens/home/pages/log_page.dart';
 import 'package:tfasoft_mobile/app/screens/home/pages/settings_page.dart';
-
-import 'package:tfasoft_mobile/app/services/state.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,13 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedPage = 1;
-
-  void _changePage(int index) {
-    setState(() {
-      _selectedPage = index;
-    });
-  }
+  final DioClient _client = DioClient();
 
   Future<void> _showSnackBar(BuildContext context, String message) async {
     final snackBar = SnackBar(
@@ -37,12 +33,33 @@ class _HomeScreenState extends State<HomeScreen> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
+  Future<void> _getLoginToken(BuildContext context) async {
+    var response = _client.getLoginToken(Provider.of<AppState>(context, listen: false).getUser["tid"]);
+
+    response.then((result) {
+      if (result.statusCode == 200) {
+        Map data = result.data;
+
+        FlutterClipboard.copy(data['token'])
+            .then((success) => _showSnackBar(context, "Token copied"));
+      }
+    });
+  }
+
   Future<void> _openUrl(BuildContext context, String url) async {
     final Uri _url = Uri.parse(url);
 
     if (!await launchUrl(_url)) {
       _showSnackBar(context, "Can not open $_url");
     }
+  }
+
+  int _selectedPage = 1;
+
+  void _changePage(int index) {
+    setState(() {
+      _selectedPage = index;
+    });
   }
 
   List<Map> drawerLinkItems = [
@@ -78,14 +95,14 @@ class _HomeScreenState extends State<HomeScreen> {
     },
   ];
 
+  final List<Widget> pages = <Widget>[
+    const LogPage(),
+    const HomePage(),
+    const SettingsPage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _pages = <Widget>[
-      const LogPage(),
-      const HomePage(),
-      const SettingsPage(),
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('TFA Mobile'),
@@ -93,9 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () =>
-                Provider.of<AppState>(context, listen: false).logout(),
-            icon: const Icon(Icons.logout),
+            onPressed: () => _getLoginToken(context),
+            icon: const Icon(Icons.vpn_key),
           ),
         ],
       ),
@@ -155,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: _pages.elementAt(_selectedPage),
+        child: pages.elementAt(_selectedPage),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
