@@ -26,13 +26,10 @@ class DioClient {
   }
 
   // Register user with email and password
-  Future<Response> register(String id, String email, String password) async {
+  Future<Response> register(String uid, Map userData) async {
     Map data = {
-      "id": id,
-      "data": {
-        "email": email,
-        "password": password,
-      }
+      "uid": uid,
+      "data": userData,
     };
 
     Response response;
