@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tfasoft_mobile/app/services/api.dart';
 import 'package:tfasoft_mobile/app/services/state.dart';
 import 'package:tfasoft_mobile/app/widgets/button/tfa_button.dart';
 import 'package:tfasoft_mobile/app/widgets/field/tfa_field.dart';
@@ -13,6 +14,8 @@ class TelegramSettings extends StatefulWidget {
 }
 
 class _TelegramSettingsState extends State<TelegramSettings> {
+  final DioClient _client = DioClient();
+
   Future<void> _showSnackBar(BuildContext context, String message) async {
     final snackBar = SnackBar(
       content: Text(message),
@@ -28,7 +31,27 @@ class _TelegramSettingsState extends State<TelegramSettings> {
 
   final TextEditingController _tid = TextEditingController();
 
+  bool loadingChangeMcode = false;
+  
   Future<void> changeMCode(BuildContext context) async {
+    setState(() => loadingChangeMcode = true);
+
+    String uid = Provider.of<AppState>(context, listen: false).getUid;
+
+    var response = _client.regenerateMCode(uid);
+
+    response.then((result) {
+      setState(() => loadingChangeMcode = false);
+
+      if (result.statusCode == 200) {
+        _showSnackBar(context, "MCode regenerated successfully");
+      } else {
+        print(result.data['message']);
+      }
+    });
+  }
+
+  Future<void> changeMCodeDialog(BuildContext context) async {
     showDialog(
       context: context,
       builder: (context) {
@@ -50,7 +73,7 @@ class _TelegramSettingsState extends State<TelegramSettings> {
             TFA_Button(
               variant: "contained",
               text: "Yes, generate",
-              onClick: () {},
+              onClick: loadingChangeMcode ? null : () => changeMCode(context),
             )
           ],
         );
@@ -95,7 +118,7 @@ class _TelegramSettingsState extends State<TelegramSettings> {
             const PageSubTitle(title: 'Change Mobile Code'),
             TFA_Button(
               variant: "contained",
-              onClick: () => changeMCode(context),
+              onClick: () => changeMCodeDialog(context),
               text: "Change M-Code",
             ),
           ],
