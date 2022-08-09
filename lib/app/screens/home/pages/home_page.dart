@@ -16,8 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final DioClient _client = DioClient();
-
   Future<void> _showSnackBar(BuildContext context, String message) async {
     final snackBar = SnackBar(
       content: Text(message),
@@ -31,32 +29,16 @@ class _HomePageState extends State<HomePage> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  Future<void> _getLoginToken(BuildContext context) async {
-    var response = _client.getLoginToken(Provider.of<AppState>(context, listen: false).getUser["tid"]);
-
-    response.then((result) {
-      if (result.statusCode == 200) {
-        Map data = result.data;
-
-        FlutterClipboard.copy(data['token'])
-          .then((success) => _showSnackBar(context, "Token copied"));
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    Map user = Provider.of<AppState>(context, listen: false).getUser;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const UnderAppBar(title: "Home"),
-        Expanded(child: Container()),
-        TFA_Button(
-          variant: "contained",
-          text: "Get access token",
-          onClick: () => _getLoginToken(context),
-        ),
+        UnderAppBar(title: "Hello ${user['name']}"),
+        const Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed lectus. Non nisi est sit amet facilisis magna. Dignissim diam quis enim lobortis scelerisque fermentum. Odio ut enim blandit volutpat maecenas volutpat. Ornare lectus sit amet est placerat in egestas erat. Nisi vitae suscipit tellus mauris a diam maecenas sed. Placerat duis ultricies lacus sed turpis tincidunt id aliquet."),
       ],
     );
   }
