@@ -32,7 +32,8 @@ class _TelegramSettingsState extends State<TelegramSettings> {
   final TextEditingController _tid = TextEditingController();
 
   bool loadingChangeMcode = false;
-  
+  bool loadingChangeTID = false;
+
   Future<void> changeMCode(BuildContext context) async {
     setState(() => loadingChangeMcode = true);
 
@@ -46,7 +47,28 @@ class _TelegramSettingsState extends State<TelegramSettings> {
       if (result.statusCode == 200) {
         _showSnackBar(context, "MCode regenerated successfully");
       } else {
-        print(result.data['message']);
+        _showSnackBar(context, result.data['message']);
+      }
+    });
+  }
+
+  Future<void> changeTID(BuildContext context) async {
+    setState(() => loadingChangeTID = true);
+
+    String uid = Provider.of<AppState>(context, listen: false).getUid;
+    Map data = {
+      "tid": _tid.text,
+    };
+
+    var response = _client.changeUserData(uid, data);
+
+    response.then((result) {
+      setState(() => loadingChangeTID = false);
+
+      if (result.statusCode == 200) {
+        _showSnackBar(context, "Telegram ID changes successfully");
+      } else {
+        _showSnackBar(context, result.data['message']);
       }
     });
   }
@@ -109,7 +131,7 @@ class _TelegramSettingsState extends State<TelegramSettings> {
             const SizedBox(height: 10),
             TFA_Button(
               variant: "contained",
-              onClick: () {},
+              onClick: loadingChangeTID ? null : () => changeTID(context),
               text: "Update Telegram ID",
             ),
             const SizedBox(height: 10),
