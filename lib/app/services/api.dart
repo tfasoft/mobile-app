@@ -122,4 +122,23 @@ class DioClient {
       return response;
     }
   }
+
+  Future<Response> changeUserData(String uid, Map newData) async {
+    Map data = {
+      "uid": uid,
+      "data": newData,
+    };
+
+    Response response;
+
+    try {
+      response = await _dio.put('$_baseUrl/user/user/update', data: data);
+
+      return response;
+    } on DioError catch (e) {
+      response = e.response!;
+
+      return response;
+    }
+  }
 }
