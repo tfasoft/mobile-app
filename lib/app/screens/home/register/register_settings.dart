@@ -18,6 +18,7 @@ class _RegisterSettingsState extends State<RegisterSettings> {
 
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
+  final TextEditingController _name = TextEditingController();
 
   Future<void> _showSnackBar(BuildContext context, String message) async {
     final snackBar = SnackBar(
@@ -37,7 +38,14 @@ class _RegisterSettingsState extends State<RegisterSettings> {
   Future<void> _registerUser(BuildContext context) async {
     setState(() => registerLoading = true);
 
-    var response = _client.register(Provider.of<AppState>(context, listen: false).getUid, _email.text, _password.text);
+    String uid = Provider.of<AppState>(context, listen: false).getUid;
+    Map data = {
+      "name": _name.text,
+      "email": _email.text,
+      "password": _password.text,
+    };
+
+    var response = _client.register(uid, data);
 
     response.then((result) {
       setState(() => registerLoading = false);
@@ -71,7 +79,15 @@ class _RegisterSettingsState extends State<RegisterSettings> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const PageSubTitle(title: 'Enter email and password'),
+                const PageSubTitle(title: 'Enter these data please'),
+                TFA_Field(
+                  variant: "outlined",
+                  password: false,
+                  label: "Name",
+                  hint: "Enter your name",
+                  controller: _name,
+                ),
+                const SizedBox(height: 10),
                 TFA_Field(
                   variant: "outlined",
                   password: false,
