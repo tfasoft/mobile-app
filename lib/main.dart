@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:tfasoft_mobile/app/screens/landing.dart';
 import 'package:tfasoft_mobile/app/services/state.dart';
 
-void main() {
+late Box box;
+
+Future<void> main() async {
+  await Hive.initFlutter();
+  box = await Hive.openBox('box');
+
   runApp(const MyApp());
 }
 
