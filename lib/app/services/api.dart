@@ -104,4 +104,22 @@ class DioClient {
       return response;
     }
   }
+
+  Future<Response> regenerateMCode(String uid) async {
+    Map data = {
+      "uid": uid,
+    };
+
+    Response response;
+
+    try {
+      response = await _dio.post('$_baseUrl/user/user/mcode/regenerate', data: data);
+
+      return response;
+    } on DioError catch (e) {
+      response = e.response!;
+
+      return response;
+    }
+  }
 }
