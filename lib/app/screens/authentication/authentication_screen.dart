@@ -38,11 +38,11 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  Future<void> _openUrl(BuildContext context, String url) async {
-    final Uri _url = Uri.parse(url);
+  Future<void> _openUrl(BuildContext context, String link) async {
+    final Uri url = Uri.parse(link);
 
-    if (!await launchUrl(_url)) {
-      _showSnackBar(context, "Can not open $_url");
+    if (!await launchUrl(url)) {
+      _showSnackBar(context, "Can not open $url");
     }
   }
 
@@ -100,7 +100,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                TFA_Field(
+                TFAField(
                   password: true,
                   controller: _mcode,
                   variant: "outlined",
@@ -118,14 +118,14 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
             ),
           ),
           actions: <Widget>[
-            TFA_Button(
+            TFAButon(
               variant: "text",
               text: "Close",
               onClick: () {
                 Navigator.of(context).pop();
               },
             ),
-            TFA_Button(
+            TFAButon(
               variant: "contained",
               text: "Connect",
               onClick: !_loadingConnect ? () => _connectUser(context) : null,
@@ -163,7 +163,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                TFA_Field(
+                TFAField(
                   password: false,
                   controller: _email,
                   variant: "outlined",
@@ -171,7 +171,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                   label: "Email",
                 ),
                 const SizedBox(height: 10),
-                TFA_Field(
+                TFAField(
                   password: true,
                   controller: _password,
                   variant: "outlined",
@@ -179,19 +179,19 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                   label: "Password",
                 ),
                 const SizedBox(height: 10),
-                TFA_Button(
+                TFAButon(
                   text: "Login",
                   variant: "contained",
                   onClick: !_loadingLogin ? () => _loginUser(context) : null,
                 ),
                 const SizedBox(height: 10),
-                TFA_Button(
+                TFAButon(
                   text: "Connect to Telegram",
                   variant: "outlined",
                   onClick: () => _connectDialog(context),
                 ),
                 const SizedBox(height: 20),
-                TFA_Button(
+                TFAButon(
                   text: "Read manual",
                   variant: "text",
                   onClick: () => _openUrl(context, "https://mobile.amirhossein.info/manual"),
