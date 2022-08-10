@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -124,6 +122,10 @@ class _HomeScreenState extends State<HomeScreen> {
             DrawerHeader(
               decoration: const BoxDecoration(
                 color: Colors.blueGrey,
+                image: DecorationImage(
+                  image: ExactAssetImage('assets/images/wallpaper_1.jpg'),
+                  fit: BoxFit.fitHeight,
+                ),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,

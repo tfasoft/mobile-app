@@ -59,7 +59,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         _email.clear();
         _password.clear();
 
-        Provider.of<AppState>(context, listen: false).login(user["_id"]);
+        Provider.of<AppState>(context, listen: false).login(user["_id"], user);
       } else if (result.statusCode == 401) {
         _showSnackBar(context, result.data['message']);
       } else {
@@ -82,7 +82,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         _mcode.clear();
         Navigator.of(context).pop();
 
-        Provider.of<AppState>(context, listen: false).login(user["_id"]);
+        Provider.of<AppState>(context, listen: false).login(user["_id"], user);
       } else if (result.statusCode == 401) {
         _showSnackBar(context, result.data['message']);
       } else {
