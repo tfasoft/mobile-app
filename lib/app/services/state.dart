@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppState extends ChangeNotifier {
-  bool _isLogin = false;
+  bool _login = false;
   String _uid = "";
   Map _user = {};
 
   bool get getLogin {
-    return _isLogin;
+    return _login;
   }
   String get getUid {
     return _uid;
@@ -15,20 +15,23 @@ class AppState extends ChangeNotifier {
     return _user;
   }
 
-  void login(String uid) {
-    _isLogin = true;
+  Future<void> login(String uid) async {
+    _login = true;
     _uid = uid;
+
     notifyListeners();
   }
-  void logout() {
-    _isLogin = false;
+  Future<void> logout() async {
+    _login = false;
     _uid = "";
     _user = {};
+
     notifyListeners();
   }
 
-  void setUser(Map user) {
+  Future<void> setUser(Map user) async {
     _user = user;
+
     notifyListeners();
   }
 }
