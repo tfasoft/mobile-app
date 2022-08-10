@@ -45,7 +45,7 @@ class _RegisterSettingsState extends State<RegisterSettings> {
       "password": _password.text,
     };
 
-    var response = _client.register(uid, data);
+    var response = _client.register(uid.toString(), data);
 
     response.then((result) {
       setState(() => registerLoading = false);
@@ -80,7 +80,7 @@ class _RegisterSettingsState extends State<RegisterSettings> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const PageSubTitle(title: 'Enter these data please'),
-                TFA_Field(
+                TFAField(
                   variant: "outlined",
                   password: false,
                   label: "Name",
@@ -88,7 +88,7 @@ class _RegisterSettingsState extends State<RegisterSettings> {
                   controller: _name,
                 ),
                 const SizedBox(height: 10),
-                TFA_Field(
+                TFAField(
                   variant: "outlined",
                   password: false,
                   label: "Email",
@@ -96,7 +96,7 @@ class _RegisterSettingsState extends State<RegisterSettings> {
                   controller: _email,
                 ),
                 const SizedBox(height: 10),
-                TFA_Field(
+                TFAField(
                   variant: "outlined",
                   password: true,
                   label: "Password",
@@ -104,7 +104,7 @@ class _RegisterSettingsState extends State<RegisterSettings> {
                   controller: _password,
                 ),
                 const SizedBox(height: 10),
-                TFA_Button(
+                TFAButon(
                   variant: "contained",
                   onClick: !registerLoading ? () => _registerUser(context) : null,
                   text: "Register account",

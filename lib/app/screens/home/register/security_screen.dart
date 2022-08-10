@@ -50,7 +50,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                TFA_Button(
+                TFAButon(
                   text: "Register account",
                   onClick: () => Navigator.push(
                     context,

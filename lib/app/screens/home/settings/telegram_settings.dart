@@ -87,12 +87,12 @@ class _TelegramSettingsState extends State<TelegramSettings> {
             ),
           ),
           actions: [
-            TFA_Button(
+            TFAButon(
               variant: "text",
               text: "Close",
               onClick: () => Navigator.pop(context),
             ),
-            TFA_Button(
+            TFAButon(
               variant: "contained",
               text: "Yes, generate",
               onClick: loadingChangeMcode ? null : () => changeMCode(context),
@@ -121,7 +121,7 @@ class _TelegramSettingsState extends State<TelegramSettings> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const PageSubTitle(title: 'Change Telegram ID'),
-            TFA_Field(
+            TFAField(
               variant: "outlined",
               password: false,
               label: "Telegram ID",
@@ -129,7 +129,7 @@ class _TelegramSettingsState extends State<TelegramSettings> {
               controller: _tid,
             ),
             const SizedBox(height: 10),
-            TFA_Button(
+            TFAButon(
               variant: "contained",
               onClick: loadingChangeTID ? null : () => changeTID(context),
               text: "Update Telegram ID",
@@ -138,7 +138,7 @@ class _TelegramSettingsState extends State<TelegramSettings> {
             const Divider(color: Colors.blueGrey),
             const SizedBox(height: 10),
             const PageSubTitle(title: 'Change Mobile Code'),
-            TFA_Button(
+            TFAButon(
               variant: "contained",
               onClick: () => changeMCodeDialog(context),
               text: "Change M-Code",

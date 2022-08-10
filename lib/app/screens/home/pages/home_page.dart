@@ -1,11 +1,8 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:tfasoft_mobile/app/services/api.dart';
 import 'package:tfasoft_mobile/app/services/state.dart';
 
-import 'package:tfasoft_mobile/app/widgets/button/tfa_button.dart';
 import 'package:tfasoft_mobile/app/widgets/title/page_title.dart';
 
 class HomePage extends StatefulWidget {

@@ -71,7 +71,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const PageSubTitle(title: 'Change name'),
-            TFA_Field(
+            TFAField(
               variant: "outlined",
               password: false,
               label: "Name",
@@ -79,7 +79,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               controller: _name,
             ),
             const SizedBox(height: 10),
-            TFA_Button(
+            TFAButon(
               variant: "contained",
               onClick: loadingName ? null : () => changeName(context),
               text: "Update name",

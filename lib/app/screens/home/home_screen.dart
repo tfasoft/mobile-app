@@ -46,11 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<void> _openUrl(BuildContext context, String url) async {
-    final Uri _url = Uri.parse(url);
+  Future<void> _openUrl(BuildContext context, String link) async {
+    final Uri url = Uri.parse(link);
 
-    if (!await launchUrl(_url)) {
-      _showSnackBar(context, "Can not open $_url");
+    if (!await launchUrl(url)) {
+      _showSnackBar(context, "Can not open $url");
     }
   }
 

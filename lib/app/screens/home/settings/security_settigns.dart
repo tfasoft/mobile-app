@@ -107,7 +107,7 @@ class _SecuritySettingsState extends State<SecuritySettings> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const PageSubTitle(title: 'Change Email'),
-            TFA_Field(
+            TFAField(
               variant: "outlined",
               password: false,
               label: "Email",
@@ -115,14 +115,14 @@ class _SecuritySettingsState extends State<SecuritySettings> {
               controller: _email,
             ),
             const SizedBox(height: 10),
-            TFA_Button(
+            TFAButon(
               variant: "contained",
               onClick: loadingEmail ? null : () => changeEmail(context),
               text: "Update Email",
             ),
             const SizedBox(height: 20),
             const PageSubTitle(title: 'Change password'),
-            TFA_Field(
+            TFAField(
               variant: "outlined",
               password: true,
               label: "Current password",
@@ -133,7 +133,7 @@ class _SecuritySettingsState extends State<SecuritySettings> {
             Row(
               children: <Widget>[
                 Expanded(
-                  child: TFA_Field(
+                  child: TFAField(
                     variant: "outlined",
                     password: true,
                     label: "New password",
@@ -143,7 +143,7 @@ class _SecuritySettingsState extends State<SecuritySettings> {
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: TFA_Field(
+                  child: TFAField(
                     variant: "outlined",
                     password: true,
                     label: "Confirm password",
@@ -154,7 +154,7 @@ class _SecuritySettingsState extends State<SecuritySettings> {
               ],
             ),
             const SizedBox(height: 10),
-            TFA_Button(
+            TFAButon(
               variant: "contained",
               onClick: loadingPassword ? null : () => changePassword(context),
               text: "Change password",
