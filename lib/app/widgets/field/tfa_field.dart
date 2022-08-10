@@ -1,7 +1,9 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 
-class TFA_Field extends StatefulWidget {
-  const TFA_Field({
+class TFAField extends StatefulWidget {
+  const TFAField({
     Key? key,
     this.variant,
     this.label,
@@ -17,10 +19,10 @@ class TFA_Field extends StatefulWidget {
   final controller;
 
   @override
-  State<TFA_Field> createState() => _TFA_FieldState();
+  State<TFAField> createState() => _TFAFieldState();
 }
 
-class _TFA_FieldState extends State<TFA_Field> {
+class _TFAFieldState extends State<TFAField> {
   @override
   Widget build(BuildContext context) {
     return TextField(

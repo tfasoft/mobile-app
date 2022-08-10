@@ -1,7 +1,9 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 
-class TFA_Button extends StatefulWidget {
-  const TFA_Button({
+class TFAButon extends StatefulWidget {
+  const TFAButon({
     Key? key,
     this.text,
     this.variant,
@@ -13,10 +15,10 @@ class TFA_Button extends StatefulWidget {
   final onClick;
 
   @override
-  State<TFA_Button> createState() => _TFA_ButtonState();
+  State<TFAButon> createState() => _TFAButonState();
 }
 
-class _TFA_ButtonState extends State<TFA_Button> {
+class _TFAButonState extends State<TFAButon> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -24,10 +26,10 @@ class _TFA_ButtonState extends State<TFA_Button> {
       child: widget.variant == "contained"
           ? ElevatedButton(
               onPressed: widget.onClick,
-              child: Text(widget.text),
               style: ElevatedButton.styleFrom(
                 elevation: 0,
               ),
+              child: Text(widget.text),
             )
           : widget.variant == "text"
               ? TextButton(
@@ -47,10 +49,10 @@ class _TFA_ButtonState extends State<TFA_Button> {
                     )
                   : ElevatedButton(
                       onPressed: widget.onClick,
-                      child: Text(widget.text),
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
                       ),
+                      child: Text(widget.text),
                     ),
     );
   }
