@@ -14,12 +14,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _scaffoldkey = GlobalKey<ScaffoldMessengerState>();
+    final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
     return ChangeNotifierProvider<AppState>(
       create: (context) => AppState(),
       child: MaterialApp(
-        scaffoldMessengerKey: _scaffoldkey,
+        scaffoldMessengerKey: scaffoldKey,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
