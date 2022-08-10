@@ -15,9 +15,10 @@ class AppState extends ChangeNotifier {
     return _user;
   }
 
-  Future<void> login(String uid) async {
+  Future<void> login(String uid, Map user) async {
     _login = true;
     _uid = uid;
+    _user = user;
 
     notifyListeners();
   }
