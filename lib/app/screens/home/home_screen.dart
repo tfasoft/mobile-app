@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _getLoginToken(BuildContext context) async {
-    var response = _client.getLoginToken(Provider.of<AppState>(context, listen: false).getUser["tid"]);
+    var response = _client.getLoginToken(
+        Provider.of<AppState>(context, listen: false).getUser["tid"]);
 
     response.then((result) {
       if (result.statusCode == 200) {
@@ -108,12 +111,11 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('TFA Mobile'),
         elevation: 0,
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () => _getLoginToken(context),
-            icon: const Icon(Icons.vpn_key),
-          ),
-        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _getLoginToken(context),
+        elevation: 0,
+        child: const Icon(Icons.vpn_key),
       ),
       drawer: Drawer(
         width: 240,
@@ -147,7 +149,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     leading: Icon(drawerLinkItems[index]['icon']),
                     iconColor: Colors.blueGrey,
                     title: Text(drawerLinkItems[index]['title']),
-                    onTap: () => _openUrl(context, drawerLinkItems[index]['url']),
+                    onTap: () =>
+                        _openUrl(context, drawerLinkItems[index]['url']),
                   );
                 },
               ),
