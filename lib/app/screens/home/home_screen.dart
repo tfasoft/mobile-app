@@ -7,7 +7,6 @@ import 'package:tfasoft_mobile/app/services/api.dart';
 import 'package:tfasoft_mobile/app/services/state.dart';
 
 import 'package:tfasoft_mobile/app/screens/home/pages/home_page.dart';
-import 'package:tfasoft_mobile/app/screens/home/pages/log_page.dart';
 import 'package:tfasoft_mobile/app/screens/home/pages/settings_page.dart';
 
 class HomeScreen extends StatefulWidget {
