@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  int _selectedPage = 1;
+  int _selectedPage = 0;
 
   void _changePage(int index) {
     setState(() {
@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   final List<Widget> pages = <Widget>[
-    const LogPage(),
+    // const LogPage(),
     const HomePage(),
     const SettingsPage(),
   ];
@@ -180,10 +180,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Accounts',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.cake),
+          //   label: 'Accounts',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
