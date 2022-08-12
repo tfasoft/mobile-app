@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tfasoft.tfasoft_mobile">
    <application
-        android:label="tfasoft_mobile"
+        android:label="TFASoft"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
