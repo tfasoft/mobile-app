@@ -3,7 +3,8 @@ import 'package:dio/dio.dart';
 class DioClient {
   final Dio _dio = Dio();
 
-  final _baseUrl = 'http://172.20.10.3:9000/api';
+  final _baseUrl = 'https://tfasoft-api.herokuapp.com/api';
+  final _testUrl = 'http://172.20.10.3:9000/api';
 
   // Login user with email and password
   Future<Response> login(String email, String password) async {
