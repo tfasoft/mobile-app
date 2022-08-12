@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
 import 'package:tfasoft_mobile/app/screens/landing.dart';
